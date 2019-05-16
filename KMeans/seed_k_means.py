@@ -2,37 +2,38 @@
 
 import numpy as np
 
-from .utils.validation import check_array
-
 from .k_means import KMeans
+from .utils.validation import check_array
 
 
 class SeedKMeans(KMeans):
 
-    def _create_center(self, X, X_train, y_train):
-        sr = set(y_train)
+    def _create_center(self, X, S, S_labels):
+        sr = set(S_labels)
         if len(sr) < self.n_clusters:
-            data_select = X[: self.n_clusters - len(sr)]
-            d = np.vstack([data_select, X_train])
-            label_rest = set(range(self.n_clusters)) - sr
-            l = np.hstack([list(label_rest), y_train])
-            centers = self._gen_center(d, l)
+            xr = super()._create_center(X, (self.n_clusters - len(sr)))
+            x = np.vstack([xr, S])
+            yr = set(range(self.n_clusters)) - sr
+            y = np.hstack([list(yr), S_labels])
+            centers = self._gen_center(x, y)
+
         elif len(sr) == self.n_clusters:
-            centers = X_train
+            centers = S
         else:
-            centers = self._gen_center(X_train, y_train)
+            centers = self._gen_center(S, S_labels)
 
         return centers
 
-    def fit(self, X, X_train, y_train):
+    def fit(self, X, S, S_labels):
         X = check_array(X, copy=self.copy_x)
-        self.cluster_centers_ = self._create_center(X, X_train, y_train)
+        S = check_array(S, copy=self.copy_x)
+        x = np.vstack([S, X])
+        self.cluster_centers_ = self._create_center(X, S, S_labels)
 
-        d = np.vstack([X_train, X])
         for _ in range(self.max_iter):
             self.labels_ = np.apply_along_axis(self._choice_center, 1, X)
-            l = np.hstack([y_train, self.labels_])
-            centers_new = self._gen_center(d, l)
+            y = np.hstack([S_labels, self.labels_])
+            centers_new = self._gen_center(x, y)
 
             if np.all(abs(self.cluster_centers_ - centers_new) <= self.tol):
                 break

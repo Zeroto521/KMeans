@@ -19,9 +19,10 @@ class KMeans(object):
         self.copy_x = copy_x
         self.n_iter_ = 0
 
-    def _create_center(self, X):
-        inds = np.random.choice(len(X), self.n_clusters)
+    def _create_center(self, X, length):
+        inds = np.random.choice(len(X), length)
         centers = X[inds]
+
         return centers
 
     def _choice_center(self, row):
@@ -40,7 +41,7 @@ class KMeans(object):
 
     def fit(self, X):
         X = check_array(X, copy=self.copy_x)
-        self.cluster_centers_ = self._create_center(X)
+        self.cluster_centers_ = self._create_center(X, len(X))
 
         for _ in range(self.max_iter):
             self.labels_ = np.apply_along_axis(self._choice_center, 1, X)
