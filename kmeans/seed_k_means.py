@@ -30,7 +30,7 @@ class SeedKMeans(KMeans):
     def _create_center(self, X, S, S_labels):
         sr = set(S_labels)
         if len(sr) < self.n_clusters:
-            xr = super()._create_center(X, (self.n_clusters - len(sr)))
+            xr = super(SeedKMeans, self)._create_center(X, (self.n_clusters - len(sr)))
             x = np.vstack([xr, S])
             yr = set(range(self.n_clusters)) - sr
             y = np.hstack([list(yr), S_labels])
