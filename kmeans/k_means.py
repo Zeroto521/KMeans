@@ -1,5 +1,23 @@
 # -*- coding: utf-8 -*-
 
+"""
+KMeans
+=====
+k-means clustering aims to partition n observations into k clusters
+in which each observation belongs to the cluster with the nearest mean,
+serving as a prototype of the cluster.
+
+Example
+----------------------------
+    >>> from kmeans import KMeans
+    >>> model = KMeans()  # build model
+    >>> labels = model.fit(data)  # Guess you have `data` which the shape is `(n, m)`. `n` is sample numbers, `m` is feature numbers.
+    >>> labels
+
+Copyright Zeroto521
+----------------------------
+"""
+
 import numpy as np
 
 from .utils.distance import l2_dist

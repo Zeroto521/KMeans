@@ -1,5 +1,24 @@
 # -*- coding: utf-8 -*-
 
+"""
+SeedKMeans
+=====
+It is an algorithm for choosing the initial values (or "seeds") for the k-means clustering algorithm.
+
+Example
+----------------------------
+    >>> from kmeans import SeedKMeans
+    >>> model = SeedKMeans()  # build model
+    # Guess you have `data` which the shape is `(n, m)`. `n` is sample numbers, `m` is feature numbers.
+    # The shape of `S` is similar to `data` but shape is `(n', m)`, `n'` is sample numbers.
+    # `S_labels` is a vector, shape like a column or a row but the size of `S_labels` is equal to `m`
+    >>> labels = model.fit(X, S, S_labels)
+    >>> labels
+
+Copyright Zeroto521
+----------------------------
+"""
+
 import numpy as np
 
 from .k_means import KMeans
