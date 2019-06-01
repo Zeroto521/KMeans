@@ -110,3 +110,6 @@ venv.bak/
 # vscode
 .history
 .vscode
+
+# article
+reference/
