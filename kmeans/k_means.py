@@ -52,7 +52,7 @@ class KMeans(object):
     def _choice_center(self, row):
         dis = np.apply_along_axis(
             self._cal_distance, 1, self.cluster_centers_, row=row)
-        labels = np.argmax(dis)
+        labels = np.argmin(dis)
 
         return labels
 
