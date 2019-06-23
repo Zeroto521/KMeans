@@ -35,9 +35,6 @@ class SeedKMeans(KMeans):
             yr = set(range(self.n_clusters)) - sr
             y = np.hstack([list(yr), S_labels])
             centers = self._gen_center(x, y)
-
-        elif len(sr) == self.n_clusters:
-            centers = S
         else:
             centers = self._gen_center(S, S_labels)
 
