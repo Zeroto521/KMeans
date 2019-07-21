@@ -46,7 +46,7 @@ class SeedKMeans(KMeans):
         x = np.vstack([S, X])
         self.cluster_centers_ = self._create_center(X, S, S_labels)
 
-        for _ in range(self.max_iter):
+        for self.n_iter_ in range(self.max_iter):
             self.labels_ = np.apply_along_axis(self._choice_center, 1, X)
             y = np.hstack([S_labels, self.labels_])
             centers_new = self._gen_center(x, y)
