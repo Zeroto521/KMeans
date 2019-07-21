@@ -55,6 +55,5 @@ class SeedKMeans(KMeans):
                 break
 
             self.cluster_centers_ = centers_new
-            self.n_iter_ += 1
 
         return self.labels_

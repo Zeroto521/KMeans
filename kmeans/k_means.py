@@ -52,7 +52,7 @@ class KMeans(object):
     def _choice_center(self, row):
         dis = np.apply_along_axis(
             self._cal_distance, 1, self.cluster_centers_, row=row)
-        labels = np.argmin(dis)
+        labels = np.argmax(dis)  # FIXME: some problem are here, strange.
 
         return labels
 
@@ -67,7 +67,7 @@ class KMeans(object):
         X = check_array(X, copy=self.copy_x)
         self.cluster_centers_ = self._create_center(X, self.n_clusters)
 
-        for _ in range(self.max_iter):
+        for self.n_iter_ in range(self.max_iter):
             self.labels_ = np.apply_along_axis(self._choice_center, 1, X)
             centers_new = self._gen_center(X, self.labels_)
 
@@ -75,7 +75,6 @@ class KMeans(object):
                 break
 
             self.cluster_centers_ = centers_new
-            self.n_iter_ += 1
 
         return self.labels_
 

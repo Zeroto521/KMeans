@@ -13,8 +13,8 @@ install:
 
 script:
     - python setup.py install
-    - coverage run examples/iris/main.py
-    - coverage run examples/watermelon/main.py
+    - python examples/watermelon/main.py
+    - python examples/iris/main.py
 
 after_success:
     - codecov

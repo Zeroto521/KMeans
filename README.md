@@ -38,3 +38,4 @@ MIT License. [@Zeroto521](https://github.com/Zeroto521)
 -   [ ] all kinds of distane
 -   [ ] write doc
 -   [ ] Optimized sparse matrix
+-   [ ] add generalized kmeans algothrims
