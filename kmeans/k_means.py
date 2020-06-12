@@ -42,9 +42,7 @@ class KMeans(object):
 
     def _create_center(self, X, numbers):
         inds = np.random.choice(len(X), numbers, replace=False)
-        centers = X[inds]
-
-        return centers
+        return X[inds]
 
     def _cal_distance(self, center, row):
         return self.dis_func(center, row)
@@ -52,9 +50,7 @@ class KMeans(object):
     def _choice_center(self, row):
         dis = np.apply_along_axis(
             self._cal_distance, 1, self.cluster_centers_, row=row)
-        labels = np.argmin(dis)
-
-        return labels
+        return np.argmin(dis)
 
     def _gen_center(self, X, labels):
         centers = np.zeros((self.n_clusters, len(X[0])))
